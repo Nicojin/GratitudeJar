@@ -22,17 +22,17 @@ namespace GratitudeJar.Models
             return _image;
         }
 
-        public new void display()
+        public override void display()
         {
-            Console.WriteLine($"[MEMORY] {Date:yyyy-MM-dd}: {Content}");
+            Console.WriteLine($"[MEMORY] {Date:yyyy-MM-dd} - {Content}");
             if (!string.IsNullOrEmpty(_image))
-                Console.WriteLine($"Image: {_image}");
+                Console.WriteLine($"  Image: {_image}");
             Console.WriteLine($"  Mood: {MoodTag}");
         }
 
-        public new string summarize()
+        public override string summarize()
         {
-            string imageIndicator = string.IsNullOrEmpty(_image) ? "" : " 📷";
+            string imageIndicator = string.IsNullOrEmpty(_image) ? "" : " [has image]";
             if (Content.Length > 50)
                 return $"Memory{imageIndicator} {Date:MM/dd}: {Content.Substring(0, 47)}...";
             else

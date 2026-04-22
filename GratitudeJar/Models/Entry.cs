@@ -55,12 +55,13 @@ namespace GratitudeJar.Models
             return _moodTag;
         }
 
-        public void display()
+        public virtual void display()
         {
-            Console.WriteLine($"[{_date:yyyy-MM-dd}] {_content} (Mood: {_moodTag})");
+            Console.WriteLine($"[ENTRY] {_date:yyyy-MM-dd} - {_content} ");
+            Console.WriteLine($"(Mood: {_moodTag})");
         }
 
-        public string summarize()
+        public virtual string summarize()
         {
             if (_content.Length > 50)
                 return $"{_date:MM/dd}: {_content.Substring(0, 47)}...";

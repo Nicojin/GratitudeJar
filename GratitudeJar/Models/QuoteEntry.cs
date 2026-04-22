@@ -22,14 +22,14 @@ namespace GratitudeJar.Models
             return _author;
         }
 
-        public new void display()
+        public override void display()
         {
             Console.WriteLine($"[QUOTE] \"{Content}\"");
             Console.WriteLine($"  — {_author} ({Date:yyyy-MM-dd})");
             Console.WriteLine($"  Mood: {MoodTag}");
         }
 
-        public new string summarize()
+        public override string summarize()
         {
             string authorShort = string.IsNullOrEmpty(_author) ? "Unknown" : _author;
             if (Content.Length > 40)

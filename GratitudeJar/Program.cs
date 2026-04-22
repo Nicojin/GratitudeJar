@@ -8,7 +8,7 @@ namespace GratitudeJar
         static void Main(string[] args)
         {
             TestProgram.RunTest();
-            Console.WriteLine("\nPress any key to exit...");
+            Console.WriteLine("\nExit");
             Console.ReadKey();
         }
     }

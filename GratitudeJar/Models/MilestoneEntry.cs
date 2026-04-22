@@ -22,14 +22,14 @@ namespace GratitudeJar.Models
             return _milestone;
         }
 
-        public new void display()
+        public override void display()
         {
-            Console.WriteLine($"[MILESTONE] {_milestone} - {Date:yyyy-MM-dd}");
+            Console.WriteLine($"[MILESTONE] {Date:yyyy-MM-dd} - {_milestone}");
             Console.WriteLine($"  {Content}");
             Console.WriteLine($"  Mood: {MoodTag}");
         }
 
-        public new string summarize()
+        public override string summarize()
         {
             string milestoneShort = _milestone.Length > 20 ? _milestone.Substring(0, 17) + "..." : _milestone;
             if (Content.Length > 40)
