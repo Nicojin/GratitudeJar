@@ -24,7 +24,7 @@ namespace GratitudeJar.Models
 
         public override void display()
         {
-            Console.WriteLine($"[MILESTONE] {Date:yyyy-MM-dd} - {_milestone}");
+            Console.WriteLine($"{Date:yyyy-MM-dd} - {_milestone}");
             Console.WriteLine($"  {Content}");
             Console.WriteLine($"  Mood: {MoodTag}");
         }

@@ -24,7 +24,7 @@ namespace GratitudeJar.Models
 
         public override void display()
         {
-            Console.WriteLine($"[QUOTE] \"{Content}\"");
+            Console.WriteLine($"\"{Content}\"");
             Console.WriteLine($"  — {_author} ({Date:yyyy-MM-dd})");
             Console.WriteLine($"  Mood: {MoodTag}");
         }

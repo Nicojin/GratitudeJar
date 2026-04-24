@@ -57,7 +57,7 @@ namespace GratitudeJar.Models
 
         public virtual void display()
         {
-            Console.WriteLine($"[ENTRY] {_date:yyyy-MM-dd} - {_content} ");
+            Console.WriteLine($"{_date:yyyy-MM-dd} - {_content} ");
             Console.WriteLine($"(Mood: {_moodTag})");
         }
 

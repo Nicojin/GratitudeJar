@@ -24,7 +24,7 @@ namespace GratitudeJar.Models
 
         public override void display()
         {
-            Console.WriteLine($"[MEMORY] {Date:yyyy-MM-dd} - {Content}");
+            Console.WriteLine($"{Date:yyyy-MM-dd} - {Content}");
             if (!string.IsNullOrEmpty(_image))
                 Console.WriteLine($"  Image: {_image}");
             Console.WriteLine($"  Mood: {MoodTag}");
