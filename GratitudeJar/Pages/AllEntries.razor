@@ -56,11 +56,12 @@
 
     private void EditEntry(Entry entry)
     {
-        // Simple edit - update content
+        editingEntry = entry;
         var newContent = $"✏️ {entry.Content}";
         entry.Content = newContent;
         Database.SaveEntry(entry);
         LoadEntries();
+        editingEntry = null;
     }
 }
 
