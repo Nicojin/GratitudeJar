@@ -1,0 +1,106 @@
+﻿@page "/add-entry"
+@using GratitudeJar.Models
+@using GratitudeJar.Data
+@inject IEntryRepository Database
+@inject NavigationManager Navigation
+
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+    <button style="background: none; border: none; font-size: 1.5rem; cursor: pointer;" @onclick='() => Navigation.NavigateTo("/entries")'>←</button>
+    <h2 style="margin: 0 0 0 10px;">New Entry</h2>
+</div>
+
+<div class="card">
+    <label style="font-weight: bold; margin-bottom: 10px; display: block;">Entry Type</label>
+    <select @bind="selectedType" class="input-field" style="margin-bottom: 20px;">
+        <option value="normal">Normal Entry</option>
+        <option value="memory">Memory</option>
+        <option value="milestone">Milestone</option>
+        <option value="quote">Quote</option>
+    </select>
+
+    @if (selectedType == "memory")
+    {
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">Image Path</label>
+        <input @bind="imagePath" class="input-field" style="margin-bottom: 20px;" placeholder="Enter image path..." />
+    }
+    @if (selectedType == "milestone")
+    {
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">Milestone Title</label>
+        <input @bind="milestoneTitle" class="input-field" style="margin-bottom: 20px;" placeholder="Enter milestone title..." />
+    }
+    @if (selectedType == "quote")
+    {
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">Author</label>
+        <input @bind="authorName" class="input-field" style="margin-bottom: 20px;" placeholder="Enter author name..." />
+    }
+
+    <label style="font-weight: bold; margin-bottom: 10px; display: block;">What are you grateful for?</label>
+    <textarea @bind="content" class="input-field" rows="6" placeholder="Write your thoughts here..."></textarea>
+
+    <label style="font-weight: bold; margin-bottom: 10px; display: block;">Mood</label>
+    <input @bind="mood" class="input-field" style="margin-bottom: 20px;" placeholder="Happy, Grateful, Peaceful..." />
+
+    <button @onclick="SaveEntry" class="btn-primary" style="margin-top: 20px;">Save Entry</button>
+</div>
+
+@code {
+    private string selectedType = "normal";
+    private string imagePath = "";
+    private string milestoneTitle = "";
+    private string authorName = "";
+    private string content = "";
+    private string mood = "";
+    private string errorMessage = "";
+
+    private void SaveEntry()
+    {
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            errorMessage = "Please enter content";
+            return;
+        }
+
+        Entry? newEntry = null;
+
+        switch (selectedType)
+        {
+            case "memory":
+                var memory = new MemoryEntry();
+                memory.Image = imagePath;
+                newEntry = memory;
+                break;
+            case "milestone":
+                var milestone = new MilestoneEntry();
+                milestone.MilestoneTitle = milestoneTitle;
+                newEntry = milestone;
+                break;
+            case "quote":
+                var quote = new QuoteEntry();
+                quote.Author = authorName;
+                newEntry = quote;
+                break;
+            default:
+                newEntry = new MemoryEntry();
+                break;
+        }
+
+        newEntry.Content = content;
+        newEntry.MoodTag = string.IsNullOrWhiteSpace(mood) ? "Grateful" : mood;
+        newEntry.Date = DateTime.Now;
+
+        Database.SaveEntry(newEntry);
+        Navigation.NavigateTo("/entries");
+    }
+}
+
+<style>
+    .input-field {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #EAE3DC;
+        border-radius: 8px;
+        background: #FDFBF7;
+        font-family: inherit;
+        box-sizing: border-box;
+    }
+</style>

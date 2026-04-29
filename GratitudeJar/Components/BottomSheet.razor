@@ -1,0 +1,28 @@
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<div class="bottom-sheet-backdrop @(IsOpen ? "open" : "")" @onclick="Close"></div>
+
+<div class="bottom-sheet @(IsOpen ? "open" : "")" @onclick:stopPropagation="true">
+    <div class="sheet-handle"></div>
+    
+    @if (IsOpen)
+    {
+        <div class="sheet-content">
+            @ChildContent
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback<bool> IsOpenChanged { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    public async Task Close()
+    {
+        IsOpen = false;
+        await IsOpenChanged.InvokeAsync(IsOpen);
+        await JSRuntime.InvokeVoidAsync("gratitudeMobile.triggerHaptic", "tap");
+    }
+}

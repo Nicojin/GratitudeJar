@@ -8,10 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Components\" />
-    <Folder Include="Pages\" />
-    <Folder Include="Services\" />
-    <Folder Include="wwwroot\css\" />
+    <Content Remove="Pages\Signin.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Pages\Signin.razor" />
   </ItemGroup>
 
 </Project>

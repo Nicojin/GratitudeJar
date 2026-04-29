@@ -1,0 +1,88 @@
+﻿@page "/"
+@using GratitudeJar.Models
+@using GratitudeJar.Data
+@inject IEntryRepository Database
+
+<div class="welcome-header" style="margin-bottom: 20px;">
+    <h2>Welcome!</h2>
+    <p style="color: var(--text-muted);">Ready to reflect today?</p>
+</div>
+
+<div class="card streak-card" style="text-align: center;">
+    <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 5px;">STREAK</h3>
+    <div style="font-size: 2.5rem; font-weight: bold; color: var(--accent-warm);">@streakCount Days</div>
+</div>
+
+<div class="card mood-card">
+    <h3>MOOD BOARD</h3>
+    @if (moodCounts.Count == 0)
+    {
+        <p style="color: var(--text-muted); padding: 20px 0;">No entries yet. Add your first entry to see your mood board!</p>
+    }
+    else
+    {
+        <div class="mood-list">
+            @foreach (var mood in moodCounts)
+            {
+                <div class="mood-item">
+                    <span class="mood-name">@mood.Key</span>
+                    <div class="mood-bar" style="width: @(Math.Min(mood.Value * 15, 200))px"></div>
+                    <span class="mood-count">@mood.Value</span>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private int streakCount = 0;
+    private Dictionary<string, int> moodCounts = new();
+
+    protected override void OnInitialized()
+    {
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        var entries = Database.GetAllEntries();
+        streakCount = entries.Count > 0 ? 5 : 0; // Placeholder streak
+        
+        moodCounts = entries
+            .Where(e => !string.IsNullOrEmpty(e.MoodTag))
+            .GroupBy(e => e.MoodTag)
+            .ToDictionary(g => g.Key, g => g.Count());
+    }
+}
+
+<style>
+    .mood-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .mood-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .mood-name {
+        width: 100px;
+        font-weight: 500;
+    }
+
+    .mood-bar {
+        height: 20px;
+        background: linear-gradient(90deg, #D4A373, #A06B42);
+        border-radius: 10px;
+        transition: width 0.3s;
+    }
+
+    .mood-count {
+        width: 40px;
+        text-align: right;
+        color: var(--text-muted);
+    }
+</style>

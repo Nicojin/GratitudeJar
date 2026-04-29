@@ -4,38 +4,19 @@ namespace GratitudeJar.Models
 {
     public class QuoteEntry : Entry
     {
-        private string _author;
-
-        public string Author
+        public override void Display()
         {
-            get { return _author; }
-            set { _author = value; }
-        }
-
-        public QuoteEntry() : base()
-        {
-            _author = string.Empty;
-        }
-
-        public string getAuthor()
-        {
-            return _author;
-        }
-
-        public override void display()
-        {
-            Console.WriteLine($"\"{Content}\"");
-            Console.WriteLine($"  — {_author} ({Date:yyyy-MM-dd})");
+            Console.WriteLine($"[QUOTE] \"{Content}\"");
+            Console.WriteLine($"  — {Author} ({Date:yyyy-MM-dd})");
             Console.WriteLine($"  Mood: {MoodTag}");
         }
 
-        public override string summarize()
+        public override string Summarize()
         {
-            string authorShort = string.IsNullOrEmpty(_author) ? "Unknown" : _author;
+            string shortAuthor = string.IsNullOrEmpty(Author) ? "Unknown" : Author;
             if (Content.Length > 40)
-                return $"Quote by {authorShort}: \"{Content.Substring(0, 37)}...\"";
-            else
-                return $"Quote by {authorShort}: \"{Content}\"";
+                return $"Quote by {shortAuthor}: \"{Content.Substring(0, 37)}...\"";
+            return $"Quote by {shortAuthor}: \"{Content}\"";
         }
     }
 }

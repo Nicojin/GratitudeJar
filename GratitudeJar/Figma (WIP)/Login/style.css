@@ -385,7 +385,9 @@
     background: linear-gradient(to right, var(--dl-color-theme-primary1) 50%, var(--dl-color-theme-neutral-dark) 50%);
     transition: background-position 300ms ease;
     font-weight: 600;
-    background-clip: text;
+    background-clip: border-box;
+    background-clip: padding-box;
+    background-clip: content-box;
     background-size: 200% 100%;
     background-position: 100%;
     -webkit-text-fill-color: transparent;

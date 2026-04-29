@@ -1,15 +1,25 @@
-﻿using GratitudeJar;
-using GratitudeJar.Models;
+﻿using GratitudeJar.Data;
 
-namespace GratitudeJar
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
+
+builder.Services.AddScoped<IEntryRepository, EntryDatabase>();
+
+var app = builder.Build();
+
+if (!app.Environment.IsDevelopment())
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            TestProgram.RunTest();
-            Console.WriteLine("\nExit");
-            Console.ReadKey();
-        }
-    }
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+
+app.MapBlazorHub();
+app.MapFallbackToPage("/_Host");
+
+app.Run();

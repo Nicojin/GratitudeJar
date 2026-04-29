@@ -4,39 +4,20 @@ namespace GratitudeJar.Models
 {
     public class MemoryEntry : Entry
     {
-        private string _image;
-
-        public string Image
+        public override void Display()
         {
-            get { return _image; }
-            set { _image = value; }
-        }
-
-        public MemoryEntry() : base()
-        {
-            _image = string.Empty;
-        }
-
-        public string getImage()
-        {
-            return _image;
-        }
-
-        public override void display()
-        {
-            Console.WriteLine($"{Date:yyyy-MM-dd} - {Content}");
-            if (!string.IsNullOrEmpty(_image))
-                Console.WriteLine($"  Image: {_image}");
+            Console.WriteLine($"[MEMORY] {Date:yyyy-MM-dd}: {Content}");
+            if (!string.IsNullOrEmpty(Image))
+                Console.WriteLine($"  Image: {Image}");
             Console.WriteLine($"  Mood: {MoodTag}");
         }
 
-        public override string summarize()
+        public override string Summarize()
         {
-            string imageIndicator = string.IsNullOrEmpty(_image) ? "" : " [has image]";
+            string indicator = string.IsNullOrEmpty(Image) ? "" : " [image]";
             if (Content.Length > 50)
-                return $"Memory{imageIndicator} {Date:MM/dd}: {Content.Substring(0, 47)}...";
-            else
-                return $"Memory{imageIndicator} {Date:MM/dd}: {Content}";
+                return $"Memory{indicator} {Date:MM/dd}: {Content.Substring(0, 47)}...";
+            return $"Memory{indicator} {Date:MM/dd}: {Content}";
         }
     }
 }

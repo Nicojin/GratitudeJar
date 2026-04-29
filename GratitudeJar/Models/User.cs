@@ -1,85 +1,23 @@
-﻿using System;
-
-namespace GratitudeJar.Models
+﻿namespace GratitudeJar.Models
 {
     public class User
     {
-        private string _username;
-        private string _pin;
-        private int _streakCount;
-        private DateTime _lastEntryDate;
+        public int UserId { get; set; }
+        public string Username { get; set; } = string.Empty;
+        public string Pin { get; set; } = string.Empty;  // Changed from private set
+        public int StreakCount { get; set; }
 
-        public string Username
+        public User() { }
+
+        public User(string username, string pin)
         {
-            get { return _username; }
-            set { _username = value; }
+            Username = username;
+            Pin = pin;
+            StreakCount = 0;
         }
 
-        public int StreakCount
-        {
-            get { return _streakCount; }
-            set { _streakCount = value; }
-        }
-
-        public DateTime LastEntryDate
-        {
-            get { return _lastEntryDate; }
-            set { _lastEntryDate = value; }
-        }
-
-        public User()
-        {
-            _username = string.Empty;
-            _pin = string.Empty;
-            _streakCount = 0;
-            _lastEntryDate = DateTime.MinValue;
-        }
-        public string getUsername()
-        {
-            return _username;
-        }
-
-        public bool verifyPin(string inputPin)
-        {
-            return _pin == inputPin;
-        }
-
-        public void setPin(string newPin)
-        {
-            _pin = newPin;
-        }
-
-        public void updateStreak()
-        {
-            DateTime today = DateTime.Now.Date;
-
-            if (_lastEntryDate == DateTime.MinValue)
-            {
-                _streakCount = 1;
-            }
-            else if (_lastEntryDate.Date == today)
-            {
-                return;
-            }
-            else if (_lastEntryDate.Date == today.AddDays(-1))
-            {
-                _streakCount++;
-            }
-            else
-            {
-                _streakCount = 1;
-            }
-
-            _lastEntryDate = today;
-        }
-
-        public int getStreak()
-        {
-            return _streakCount;
-        }
-        public string GetPinHash()
-        {
-            return _pin;
-        }
+        public void UpdateStreak() => StreakCount++;
+        public int GetStreak() => StreakCount;
+        public bool EnterPin(string input) => input == Pin;
     }
 }

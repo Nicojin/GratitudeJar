@@ -4,69 +4,26 @@ namespace GratitudeJar.Models
 {
     public class Entry
     {
-        private int _entryId;
-        private string _content;
-        private DateTime _date;
-        private string _moodTag;
+        public int EntryId { get; set; }
+        public string Content { get; set; } = string.Empty;
+        public DateTime Date { get; set; } = DateTime.Now;
+        public string MoodTag { get; set; } = string.Empty;
+        public int UserId { get; set; }
 
-        public int EntryId
+        public string Image { get; set; } = string.Empty;
+        public string MilestoneTitle { get; set; } = string.Empty;
+        public string Author { get; set; } = string.Empty;
+
+        public virtual void Display()
         {
-            get { return _entryId; }
-            set { _entryId = value; }
+            Console.WriteLine($"[{Date:yyyy-MM-dd}] {Content} (Mood: {MoodTag})");
         }
 
-        public string Content
+        public virtual string Summarize()
         {
-            get { return _content; }
-            set { _content = value; }
-        }
-
-        public DateTime Date
-        {
-            get { return _date; }
-            set { _date = value; }
-        }
-
-        public string MoodTag
-        {
-            get { return _moodTag; }
-            set { _moodTag = value; }
-        }
-
-        public Entry()
-        {
-            _date = DateTime.Now;
-            _moodTag = "grateful";
-            _content = string.Empty;
-        }
-
-        public int getId()
-        {
-            return _entryId;
-        }
-
-        public string getContent()
-        {
-            return _content;
-        }
-
-        public string getMoodTag()
-        {
-            return _moodTag;
-        }
-
-        public virtual void display()
-        {
-            Console.WriteLine($"{_date:yyyy-MM-dd} - {_content} ");
-            Console.WriteLine($"(Mood: {_moodTag})");
-        }
-
-        public virtual string summarize()
-        {
-            if (_content.Length > 50)
-                return $"{_date:MM/dd}: {_content.Substring(0, 47)}...";
-            else
-                return $"{_date:MM/dd}: {_content}";
+            if (Content.Length > 50)
+                return $"{Date:MM/dd}: {Content.Substring(0, 47)}...";
+            return $"{Date:MM/dd}: {Content}";
         }
     }
 }

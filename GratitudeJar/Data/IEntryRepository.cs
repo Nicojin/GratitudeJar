@@ -1,6 +1,19 @@
-﻿namespace GratitudeJar.Data
+﻿using System.Collections.Generic;
+using GratitudeJar.Models;
+
+namespace GratitudeJar.Data
 {
-    public class EntryDatabase
+    public interface IEntryRepository
     {
+        void SaveEntry(Entry entry);
+        void DeleteEntry(int id);
+        List<Entry> GetAllEntries();
+        Entry GetRandomEntry();
+        int GetEntryCount();
+
+        // User methods
+        void SaveUser(User user);
+        User? GetUser(string username);
+        User? GetUserById(int id);
     }
 }

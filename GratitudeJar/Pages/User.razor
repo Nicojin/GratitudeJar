@@ -1,0 +1,66 @@
+﻿@page "/user"
+@using GratitudeJar.Data
+@using GratitudeJar.Models
+@inject IEntryRepository Database
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2 style="margin:0;">Profile</h2>
+    <button class="btn-settings" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-main);">
+        ⚙️ Settings
+    </button>
+</div>
+
+<div class="card" style="text-align: center; padding-top: 40px;">
+    <div style="width: 100px; height: 100px; background: #EAE3DC; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">
+        👤
+    </div>
+    <h3 style="margin-bottom: 5px;">Guest User</h3>
+    <p style="color: var(--text-muted); margin-top: 0; margin-bottom: 30px;">gratitude@journal.com</p>
+
+    <div style="text-align: left; border-top: 1px solid #EAE3DC; padding-top: 20px;">
+        <div class="info-row">
+            <span class="info-label">Total Entries</span>
+            <span class="info-value">@totalEntries</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Jar Tier</span>
+            <span class="info-value">@currentTier</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Entry Limit</span>
+            <span class="info-value">@entryLimit</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Joined</span>
+            <span class="info-value">@joinDate</span>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int totalEntries = 0;
+    private string currentTier = "Glass";
+    private int entryLimit = 30;
+    private string joinDate = DateTime.Now.ToString("MMMM yyyy");
+
+    protected override void OnInitialized()
+    {
+        totalEntries = Database.GetEntryCount();
+        
+        var upgrade = new JarUpgrade();
+        upgrade.ApplyUpgrade(totalEntries);
+        currentTier = upgrade.CurrentTier.ToString();
+        entryLimit = upgrade.EntryLimit;
+    }
+}
+
+<style>
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #f5f0ec;
+    }
+    .info-label { color: var(--text-muted); font-weight: 500; }
+    .info-value { color: var(--text-main); font-weight: 600; }
+</style>
