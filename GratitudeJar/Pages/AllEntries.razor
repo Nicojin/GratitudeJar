@@ -25,7 +25,7 @@
                     <span style="font-size: 0.7rem; color: var(--text-muted);">Mood: @entry.MoodTag</span>
                 </div>
                 <div class="entry-actions">
-                    <button class="action-btn edit-btn" @onclick='() => EditEntry(entry)'>✏️</button>
+                    <button class="action-btn edit-btn" @onclick='() => EditEntry(entry.EntryId)'>✏️</button>
                     <button class="action-btn delete-btn" @onclick='() => DeleteEntry(entry.EntryId)'>🗑️</button>
                 </div>
             </div>
@@ -35,7 +35,6 @@
 
 @code {
     private List<Entry> allEntries = new();
-    private Entry? editingEntry = null;
 
     protected override void OnInitialized()
     {
@@ -54,14 +53,9 @@
         LoadEntries();
     }
 
-    private void EditEntry(Entry entry)
+    private void EditEntry(int id)
     {
-        editingEntry = entry;
-        var newContent = $"✏️ {entry.Content}";
-        entry.Content = newContent;
-        Database.SaveEntry(entry);
-        LoadEntries();
-        editingEntry = null;
+        Navigation.NavigateTo($"/edit-entry/{id}");
     }
 }
 

@@ -1,0 +1,76 @@
+﻿@page "/edit-entry/{id:int}"
+@using GratitudeJar.Models
+@using GratitudeJar.Data
+@inject IEntryRepository Database
+@inject NavigationManager Navigation
+
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+    <button style="background: none; border: none; font-size: 1.5rem; cursor: pointer;" @onclick='() => Navigation.NavigateTo("/all-entries")'>←</button>
+    <h2 style="margin: 0 0 0 10px;">Edit Entry</h2>
+</div>
+
+<div class="card">
+    @if (entry == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">Content</label>
+        <textarea @bind="editContent" class="input-field" rows="6"></textarea>
+
+        <label style="font-weight: bold; margin-bottom: 10px; display: block;">Mood</label>
+        <input @bind="editMood" class="input-field" style="margin-bottom: 20px;" />
+
+        <button @onclick="SaveEdit" class="btn-primary">Save Changes</button>
+        <button @onclick='() => Navigation.NavigateTo("/all-entries")' class="btn-secondary" style="margin-top: 10px;">Cancel</button>
+    </div>
+}
+
+@code {
+    [Parameter] public int id { get; set; }
+    private Entry? entry;
+    private string editContent = "";
+    private string editMood = "";
+
+    protected override void OnInitialized()
+    {
+        LoadEntry();
+    }
+
+    private void LoadEntry()
+    {
+        var allEntries = Database.GetAllEntries();
+        entry = allEntries.FirstOrDefault(e => e.EntryId == id);
+        
+        if (entry != null)
+        {
+            editContent = entry.Content;
+            editMood = entry.MoodTag;
+        }
+        StateHasChanged();
+    }
+
+    private void SaveEdit()
+    {
+        if (entry != null)
+        {
+            entry.Content = editContent;
+            entry.MoodTag = editMood;
+            Database.SaveEntry(entry);
+            Navigation.NavigateTo("/all-entries");
+        }
+    }
+}
+
+<style>
+    .input-field {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #EAE3DC;
+        border-radius: 8px;
+        background: #FDFBF7;
+        font-family: inherit;
+        box-sizing: border-box;
+    }
+</style>

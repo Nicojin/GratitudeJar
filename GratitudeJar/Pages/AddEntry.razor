@@ -41,9 +41,10 @@
     <input @bind="mood" class="input-field" style="margin-bottom: 20px;" placeholder="Happy, Grateful, Peaceful..." />
 
     <button @onclick="SaveEntry" class="btn-primary" style="margin-top: 20px;">Save Entry</button>
+    
     @if (!string.IsNullOrEmpty(errorMessage))
     {
-        <div style="color: #d32f2f; margin-top: 10px;">@errorMessage</div>
+        <div style="color: #d32f2f; margin-top: 10px; text-align: center;">@errorMessage</div>
     }
 </div>
 
@@ -65,7 +66,7 @@
         }
 
         errorMessage = "";
-
+        
         Entry? newEntry = null;
 
         switch (selectedType)
@@ -85,8 +86,9 @@
                 quote.Author = authorName;
                 newEntry = quote;
                 break;
+            case "normal":
             default:
-                newEntry = new MemoryEntry();
+                newEntry = new Entry();
                 break;
         }
 
