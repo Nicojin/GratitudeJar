@@ -7,7 +7,7 @@
     --terracotta: #E07A5F;
     --warm-brown: #8B5A2B;
     --soft-gold: #D4AF37;
-    /* UI Colors */
+    /* UI */
     --bg-warm: #FDFBF7;
     --card-bg: #FFFFFF;
     --text-main: #4A3B32;
@@ -33,7 +33,6 @@
     --safe-bottom: env(safe-area-inset-bottom, 16px);
 }
 
-/* GLOBAL RESETS & BASE STYLES */
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -55,7 +54,6 @@ h1, h2, h3, .handwritten {
     color: var(--warm-brown);
 }
 
-/* LAYOUT COMPONENTS */
 .mobile-container {
     max-width: 428px;
     margin: 0 auto;
@@ -91,7 +89,6 @@ h1, h2, h3, .handwritten {
     color: var(--text-main);
 }
 
-/* CARDS */
 .card {
     background: var(--card-bg);
     border-radius: var(--border-radius);

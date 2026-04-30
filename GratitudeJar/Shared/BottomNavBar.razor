@@ -34,7 +34,6 @@
 
     private void Navigate(string route)
     {
-        // Trigger haptics
         _ = JSRuntime.InvokeVoidAsync("gratitudeMobile.triggerHaptic", "tap");
         NavManager.NavigateTo($"/{route}");
     }
@@ -44,7 +43,5 @@
     private void OpenAddEntry()
     {
         _ = JSRuntime.InvokeVoidAsync("gratitudeMobile.triggerHaptic", "tap");
-        // In a real app, this would fire an EventCallback or use a state container
-        // to tell the MainLayout to pop open the <BottomSheet> component.
     }
 }

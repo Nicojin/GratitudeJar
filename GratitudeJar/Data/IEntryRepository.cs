@@ -10,8 +10,6 @@ namespace GratitudeJar.Data
         List<Entry> GetAllEntries();
         Entry GetRandomEntry();
         int GetEntryCount();
-
-        // User methods
         void SaveUser(User user);
         User? GetUser(string username);
         User? GetUserById(int id);

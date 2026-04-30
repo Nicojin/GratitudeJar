@@ -12,7 +12,6 @@ namespace GratitudeJar.Data
         private int _nextEntryId = 1;
         private int _nextUserId = 1;
 
-        // Entry methods
         public void SaveEntry(Entry entry)
         {
             if (entry.EntryId == 0)
@@ -56,7 +55,7 @@ namespace GratitudeJar.Data
             return _entries.Count;
         }
 
-        // User methods
+        // User
         public void SaveUser(User user)
         {
             var existing = _users.FirstOrDefault(u => u.Username == user.Username);
