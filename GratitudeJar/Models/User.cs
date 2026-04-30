@@ -4,7 +4,7 @@
     {
         public int UserId { get; set; }
         public string Username { get; set; } = string.Empty;
-        public string Pin { get; set; } = string.Empty;  // Changed from private set
+        public string Pin { get; set; } = string.Empty;
         public int StreakCount { get; set; }
 
         public User() { }

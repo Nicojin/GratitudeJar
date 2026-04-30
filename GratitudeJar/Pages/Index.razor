@@ -10,12 +10,21 @@
 
 <div class="card streak-card" style="text-align: center;">
     <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 5px;">STREAK</h3>
-    <div style="font-size: 2.5rem; font-weight: bold; color: var(--accent-warm);">5 Days</div>
+    <div style="font-size: 2.5rem; font-weight: bold; color: var(--accent-warm);">@streakCount Days</div>
 </div>
 
 <div class="card mood-card">
     <h3>MOOD BOARD</h3>
     <p style="color: var(--text-muted); padding: 20px 0; text-align: center;">
-        Mood tracking coming soon!
+        WIP
     </p>
 </div>
+
+@code {
+    private int streakCount = 1;
+
+    protected override void OnInitialized()
+    {
+        streakCount = 1;
+    }
+}
