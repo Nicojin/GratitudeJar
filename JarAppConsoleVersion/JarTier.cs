@@ -1,0 +1,1 @@
+public enum JarTier { Glass, Gold, Diamond }
