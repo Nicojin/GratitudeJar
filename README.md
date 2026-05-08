@@ -1,125 +1,234 @@
+---
+
+# 🌿 CITADEL: Gratitude Jar Mobile Application Prototype
+
 <p align="center">
-  <img src="AOOP_Assets/ReadMeheader.png" width="100%">
+  <img src="AOOP_Assets/ReadMeheader.png" width="100%" alt="CITADEL Header">
 </p>
 
-## Project Description and Purpose
-CITADEL is a mobile application prototype designed to help users practice gratitude and self-reflection through digital journaling.
+<p align="center">
+  <i>“A digital space for gratitude, reflection, and emotional growth.”</i>
+</p>
 
-It allows users to write different types of entries such as:
-- Milestones
-- Quotes
-- Memories
-- General journal entries
-
-The main purpose of CITADEL is to promote emotional well-being by encouraging users to reflect on positive experiences, track their mood over time, and build consistency through journaling streaks.
+<p align="center">
+  <img src="https://img.shields.io/badge/.NET-10-purple?style=for-the-badge&logo=dotnet&logoColor=white">
+  <img src="https://img.shields.io/badge/Architecture-Component--Based-00C853?style=for-the-badge&logo=icloud&logoColor=white">
+  <img src="https://img.shields.io/badge/Database-SQLite-03A9F4?style=for-the-badge&logo=sqlite&logoColor=white">
+  <img src="https://img.shields.io/badge/Status-Prototype-FFB300?style=for-the-badge&logo=github&logoColor=white">
+</p>
 
 ---
 
-## UML Diagram
-> Paste the final UML Diagram image here.
+## ━━━━━━━━━━━━━━━━━━━━
 
-```md
-![UML Diagram](path/to/your/uml-diagram.png)
+## 🌟 Project Overview
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+🧠 **CITADEL** is a mobile journaling prototype designed to promote **gratitude practice, emotional awareness, and reflective thinking** through structured digital journaling.
+
+It transforms everyday memories into meaningful reflections that users can revisit anytime.
+
+---
+
+### ✨ Entry Types Supported
+
+* 🌱 Milestones
+* 💬 Quotes
+* 📸 Memories
+* 📝 General Journal Entries
+
+---
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+## 🎯 Purpose & Vision
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+💡 The system is designed to:
+
+* 🌿 Encourage daily reflection and mindfulness
+* 🧠 Improve emotional self-awareness
+* 📊 Track personal mood trends over time
+* 🔁 Build journaling consistency through streaks
+* 🫙 Create a “digital gratitude memory space”
+
+> ⭐ *“Small reflections lead to meaningful growth.”*
+
+---
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+## 🧱 System Architecture
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+🧩 CITADEL follows a **modular component-based architecture**:
+
+```
+📦 Application Core
+ ├── 📖 Journal Module
+ ├── 🫙 Gratitude Jar Module
+ ├── 😊 Mood Analytics Module
+ ├── 🔥 Streak System Module
+ └── 👤 Profile Module
+```
+
+Each module operates independently while communicating through a unified navigation system.
+
+---
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+## 📊 UML Design
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+<p align="center">
+  <img src="path/to/your/uml-diagram.png" width="90%" alt="UML Diagram">
+</p>
+
+> 📌 Replace with final system UML diagram
+
+---
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+## ⚙️ Features & Functionalities
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+### 📖 Journal System
+
+* ✍️ Create entries (milestone, quote, memory, journal)
+* ✏️ Edit entries anytime
+* 🗑️ Delete unwanted entries
+* 📂 Organized timeline storage
+
+---
+
+### 🫙 Gratitude Jar
+
+* 🤲 Shake interaction mechanic
+* 🎲 Random memory retrieval
+* 💭 Nostalgia-based reflection system
+
+---
+
+### 😊 Mood Analytics
+
+* 📈 Mood trend visualization
+* 🧠 Emotional pattern tracking
+* 📊 Historical sentiment overview
+
+---
+
+### 🔥 Streak System
+
+* 📅 Tracks daily journaling activity
+* 🚀 Encourages consistency
+* 🏆 Motivation-based feedback loop
+
+---
+
+### 👤 Profile Module
+
+* 👤 User information dashboard
+* 📊 Activity summary
+* ⚙️ Profile management
+
+---
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+## 🔄 Application Flow
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+```
+🔐 Login / Register
+        ↓
+🏠 Dashboard
+        ↓
+────────────────────────
+📖 Journal | 🫙 Jar | 😊 Mood | 👤 Profile
+────────────────────────
+```
+
+### 🧭 Navigation System
+
+* Bottom navigation-based UI
+* Instant module switching
+* State-driven updates (real-time UI refresh)
+
+---
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+## 🧠 Technical Stack
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+### 💻 Core Technologies
+
+* 🟣 ASP.NET Core / Blazor
+* ⚙️ C++ Backend Logic
+* 🗄️ SQLite Database
+* 🧠 Roslyn Compiler (C#)
+* 🧰 Visual Studio 2022
+
+---
+
+### 🧩 Engineering Principles
+
+* Component-based architecture
+* Separation of concerns
+* Event-driven UI updates
+* Lightweight local persistence
+
+---
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+## 🚀 How to Run
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+### 📂 Step 1: Open Project
+
+```bash
+C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
 ```
 
 ---
 
-## Features and Functionalities
+### ▶️ Step 2: Build & Run
 
-### 📖 Journal Entry System
-- Add entries (milestone, quote, memory, or general notes)
-- Edit existing entries
-- Delete unwanted entries
-
-### 🫙 Gratitude Jar Feature
-- Tap the jar to “shake” it
-- Random entry is displayed for reflection and nostalgia
-
-### 😊 Mood Board
-- Displays user’s emotional trends based on past entries
-- Visual representation of feelings over time
-
-### 🔥 Streak System
-- Tracks consecutive days of journaling
-- Encourages consistency and habit-building
-
-### 👤 Profile Panel
-- Displays user information
+* Press **F5**
+* OR click **▶ Run (Green Button)**
 
 ---
 
-## How the Program Works
+### ⚙️ System Behavior
 
-CITADEL is a mobile journaling application prototype developed using modern software development practices.
-
-The application follows a component-based architecture where each feature (Journal, Mood Board, Gratitude Jar, Profile) is treated as a separate module connected through a bottom navigation bar.
-
-### Technical Overview
-
-- The system is developed using **Razor Pages** for the web interface and **C++** for backend logic and core functionality.
-- Data such as journal entries, moods, and streaks are stored using **SQLite**.
-- The UI updates dynamically when users interact with different modules.
-- State management is used to handle changes in entries, moods, and user activity in real time.
-
-### App Behavior
-
-When the app launches, the user is directed to the login interface where they can create an account or log in.
-
-A bottom navigation bar allows switching between:
-- Mood Board and Streak
-- Gratitude Jar
-- Entries
-- Profile
-
-Users can:
-- Create, edit, or delete journal entries
-- View mood trends
-- Shake the Gratitude Jar to reveal a random memory
-- Manage profile information
-
-The app continuously updates streaks and mood insights based on user activity.
+* NuGet packages auto-restore 📦
+* Project compiles via Roslyn 🧠
+* Local server starts automatically 🌐
 
 ---
 
-## How to Run the Application
+## ━━━━━━━━━━━━━━━━━━━━
 
-CITADEL is a **.NET-based project prototype** developed using **Visual Studio 2022**.
+## 👨‍💻 Development Team
 
-### Steps to Run:
+## ━━━━━━━━━━━━━━━━━━━━
 
-1. Open the solution file in Visual Studio 2022:
-C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
-
-
-2. Wait for Visual Studio to:
-- Load the project  
-- Restore NuGet packages  
-- Resolve dependencies  
-
-3. Run the application by:
-- Pressing **F5**, or  
-- Clicking the **green ▶ Run button**
-
-4. The application will build and launch in a local development environment.
-
-### Technical Notes:
-- Built using **ASP.NET Core / Blazor**
-- Uses **.NET 10**
-- Compiled using **Roslyn C# compiler (csc)**
-- Developed in **Visual Studio 2022**
-- Visual Studio handles:
-  - Package restoration (NuGet)
-  - Compilation
-  - Local server execution
----
-
-## Developer Team
-
-<table width="100%">
+<table>
   <tr>
-    <th>Name</th>
-    <th>Role</th>
-    <th>Email</th>
+    <th>👨‍💻 Name</th>
+    <th>🧩 Role</th>
+    <th>📧 Contact</th>
   </tr>
 
   <tr>
@@ -130,14 +239,34 @@ C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
 
   <tr>
     <td>Magbuhat, Julian Carlo C.</td>
-    <td>Graphic User Interface</td>
+    <td>UI / UX Developer</td>
     <td>24-01351@g.batstate-u.edu.ph</td>
   </tr>
 
   <tr>
     <td>Apolinar, Jev Austin A.</td>
-    <td>Logic Developer / Tester</td>
+    <td>Logic Developer / QA Tester</td>
     <td>24-06667@g.batstate-u.edu.ph</td>
   </tr>
 </table>
 
+---
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+## 🌱 Closing Statement
+
+## ━━━━━━━━━━━━━━━━━━━━
+
+<p align="center">
+  <b>“CITADEL is not just an app — it is a reflection of growth, gratitude, and human experience.”</b>
+</p>
+
+<p align="center">
+  🌿 Built with intention • Designed for reflection • Engineered for growth 🌿
+</p>
+
+---
+
+
+Just tell me 👍
