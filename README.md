@@ -88,12 +88,12 @@ The app continuously updates streaks and mood insights based on user activity.
 ## Developer Team
 
 👨‍💻 Fernandez, John Rommel P. – Project Manager / Lead Developer  
-📧 24-07945@g.batstate-u.edu.ph
+📧 24-07945@g.batstate-u.edu.ph  
 
-👨‍💻 Julian Carlo C. Magbuhat – Graphic User Interface 
+👨‍💻 Julian Carlo C. Magbuhat – Graphic User Interface  
 📧 24-01351@g.batstate-u.edu.ph  
 
 👨‍💻 Apolinar, Jev Austin A. – Logic Developer / Tester  
-📧 24-06667@g.bastate-u.edu.ph
+📧 24-06667@g.batstate-u.edu.ph  
 
 ---
