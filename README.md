@@ -87,8 +87,6 @@ The app continuously updates streaks and mood insights based on user activity.
 
 ## Developer Team
 
-## 👥 Developers / Team Members
-
 | Name | Role | Email |
 |------|------|-------|
 | Fernandez, John Rommel P. | Project Manager / Lead Developer | 24-07945@g.batstate-u.edu.ph |
