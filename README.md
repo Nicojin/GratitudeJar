@@ -87,7 +87,7 @@ The app continuously updates streaks and mood insights based on user activity.
 
 ## Developer Team
 
-<table width="1000">
+<table width="100%>
   <tr>
     <th>Name</th>
     <th>Role</th>
