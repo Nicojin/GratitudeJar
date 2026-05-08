@@ -126,43 +126,88 @@ Each module operates independently while communicating through a unified navigat
 
 <br>
 
-### Core Technologies
+## Core Technologies
+<br>
 
-<table align="center">
-  <tr>
-    <td align="center" width="160">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" width="50"><br>
-      Visual Studio
-    </td>
+<div align="center">
 
-    <td align="center" width="160">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" width="50"><br>
-      Figma
-    </td>
+<table>
+<tr>
+<th align="center" width="33%">🧩 Frontend & UI</th>
+<th align="center" width="33%">⚙️ Application Logic & 🗄️ Data</th>
+<th align="center" width="33%">🧰 Development Tools</th>
+</tr>
+<tr>
+<td align="center" valign="top" width="33%">
 
-    <td align="center" width="160">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" width="50"><br>
-      SQLite
-    </td>
-  </tr>
+<br>
 
-  <tr>
-    <td align="center" width="160">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" width="50"><br>
-      .NET
-    </td>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blazor/blazor-original.svg" width="60"/><br>
+<b>Blazor</b><br>
+<sub>Component-based UI framework for interactive journaling experience</sub>
 
-    <td align="center" width="160">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blazor/blazor-original.svg" width="50"><br>
-      Blazor
-    </td>
+</td>
+<td align="center" valign="top" width="33%">
 
-    <td align="center" width="160">
-      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" width="50"><br>
-      C++
-    </td>
-  </tr>
+<br>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" width="60"/><br>
+<b>C++</b><br>
+<sub>Handles core logic for journaling, mood tracking, and streak computation</sub>
+
+</td>
+<td align="center" valign="top" width="33%">
+
+<br>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" width="60"/><br>
+<b>Visual Studio 2022</b><br>
+<sub>Primary IDE for development and debugging</sub>
+
+</td>
+</tr>
+<tr>
+<td align="center" valign="top" width="33%">
+
+<br>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" width="60"/><br>
+<b>ASP.NET Core</b><br>
+<sub>Backend web framework powering routing and application structure</sub>
+
+<br>
+
+</td>
+<td align="center" valign="top" width="15%">
+
+<br>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" width="60"/><br>
+<b>SQLite</b><br>
+<sub>Lightweight embedded database for offline-first storage</sub>
+
+<br>
+
+</td>
+<td align="center" valign="top" width="33%">
+
+<br>
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" width="60"/><br>
+<b>Figma</b><br>
+<sub>UI/UX design and prototyping tool</sub>
+
+<br>
+
+</td>
+</tr>
 </table>
+
+</div>
+
+<p align="center">
+  <i>Modern UI + lightweight backend + local-first architecture</i>
+</p>
 
 <br>
  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
