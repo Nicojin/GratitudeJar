@@ -61,8 +61,6 @@ The application follows a component-based architecture where each feature (Journ
 - The UI updates dynamically when users interact with different modules.
 - State management is used to handle changes in entries, moods, and user activity in real time.
 
----
-
 ## 📱 App Behavior
 
 When the app launches, the user is directed to the login interface where they can create an account or log in.
