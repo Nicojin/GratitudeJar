@@ -117,12 +117,15 @@ npm start
 
 ---
 
-## 👨‍💻 Developer Team
+## Developer Team
 
-| Name | Role |
-|------|------|
-| Fernandez, John Rommel P. | Project Manager / Lead Developer <br> 📧 [Insert email] |
-| Magbuhat, Julian Carlo C. | GUI Developer <br> 📧 24-01351@g.batstate-u.edu.ph |
-| Apolinar, Jev Austin A. | Logic Developer / Tester <br> 📧 [Insert email] |
+👨‍💻 Fernandez, John Rommel P. – Project Manager / Lead Developer  
+📧 [Insert email]
+
+👨‍💻 Julian Carlo C. Magbuhat – GUI  
+📧 24-01351@g.batstate-u.edu.ph  
+
+👨‍💻 Apolinar, Jev Austin A. – Logic Developer / Tester  
+📧 [Insert email]
 
 ---
