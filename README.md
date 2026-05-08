@@ -48,20 +48,20 @@ The main purpose of CITADEL is to promote emotional well-being by encouraging us
 
 ---
 
-## ⚙️ How the Program Works
+## How the Program Works
 
 CITADEL is a mobile journaling application prototype developed using modern software development practices.
 
 The application follows a component-based architecture where each feature (Journal, Mood Board, Gratitude Jar, Profile) is treated as a separate module connected through a bottom navigation bar.
 
-### 🧠 Technical Overview
+### Technical Overview
 
 - The system is developed using **Razor Pages** for the web interface and **C++** for backend logic and core functionality.
 - Data such as journal entries, moods, and streaks are stored using **SQLite**.
 - The UI updates dynamically when users interact with different modules.
 - State management is used to handle changes in entries, moods, and user activity in real time.
 
-### 📱 App Behavior
+### App Behavior
 
 When the app launches, the user is directed to the login interface where they can create an account or log in.
 
@@ -101,8 +101,6 @@ C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
 - Clicking the **green ▶ Run button**
 
 4. The application will build and launch in a local development environment.
-
---
 
 ### Technical Notes:
 - Built using **ASP.NET Core / Blazor**
