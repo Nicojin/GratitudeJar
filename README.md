@@ -1,6 +1,4 @@
----
-
-# 🌿 CITADEL: Gratitude Jar Mobile Application Prototype
+<h1 align="center">Gratitude Jar Mobile Application Prototype</h1>
 
 <p align="center">
   <img src="AOOP_Assets/ReadMeheader.png" width="100%" alt="CITADEL Header">
@@ -17,36 +15,28 @@
   <img src="https://img.shields.io/badge/Status-Prototype-FFB300?style=for-the-badge&logo=github&logoColor=white">
 </p>
 
----
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━   
+ 
+## Project Overview
 
-## ━━━━━━━━━━━━━━━━━━━━
-
-## 🌟 Project Overview
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-🧠 **CITADEL** is a mobile journaling prototype designed to promote **gratitude practice, emotional awareness, and reflective thinking** through structured digital journaling.
+ **CITADEL** is a mobile journaling prototype designed to promote **gratitude practice, emotional awareness, and reflective thinking** through structured digital journaling.
 
 It transforms everyday memories into meaningful reflections that users can revisit anytime.
 
----
-
-### ✨ Entry Types Supported
+### Entry Types Supported
 
 * 🌱 Milestones
 * 💬 Quotes
 * 📸 Memories
 * 📝 General Journal Entries
 
----
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+ 
+## Purpose & Vision
 
-## ━━━━━━━━━━━━━━━━━━━━
-
-## 🎯 Purpose & Vision
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-💡 The system is designed to:
+The system is designed to:
 
 * 🌿 Encourage daily reflection and mindfulness
 * 🧠 Improve emotional self-awareness
@@ -54,20 +44,17 @@ It transforms everyday memories into meaningful reflections that users can revis
 * 🔁 Build journaling consistency through streaks
 * 🫙 Create a “digital gratitude memory space”
 
-> ⭐ *“Small reflections lead to meaningful growth.”*
+>  *“Small reflections lead to meaningful growth.”*
 
----
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+ 
+## System Architecture
 
-## ━━━━━━━━━━━━━━━━━━━━
-
-## 🧱 System Architecture
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-🧩 CITADEL follows a **modular component-based architecture**:
+CITADEL follows a **modular component-based architecture**
 
 ```
-📦 Application Core
+Application Core
  ├── 📖 Journal Module
  ├── 🫙 Gratitude Jar Module
  ├── 😊 Mood Analytics Module
@@ -77,152 +64,134 @@ It transforms everyday memories into meaningful reflections that users can revis
 
 Each module operates independently while communicating through a unified navigation system.
 
----
-
-## ━━━━━━━━━━━━━━━━━━━━
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
 
 ## 📊 UML Design
-
-## ━━━━━━━━━━━━━━━━━━━━
 
 <p align="center">
   <img src="path/to/your/uml-diagram.png" width="90%" alt="UML Diagram">
 </p>
 
-> 📌 Replace with final system UML diagram
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
 
----
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-## ⚙️ Features & Functionalities
-
-## ━━━━━━━━━━━━━━━━━━━━
+## Features & Functionalities
 
 ### 📖 Journal System
 
-* ✍️ Create entries (milestone, quote, memory, journal)
-* ✏️ Edit entries anytime
-* 🗑️ Delete unwanted entries
-* 📂 Organized timeline storage
-
----
+*  Create entries (milestone, quote, memory, journal)
+*  Edit entries anytime
+*  Delete unwanted entries
+* Organized timeline storage
+  
 
 ### 🫙 Gratitude Jar
 
-* 🤲 Shake interaction mechanic
-* 🎲 Random memory retrieval
-* 💭 Nostalgia-based reflection system
-
----
+* Shake interaction mechanic
+* Random memory retrieval
+* Nostalgia-based reflection system
+  
 
 ### 😊 Mood Analytics
 
-* 📈 Mood trend visualization
-* 🧠 Emotional pattern tracking
-* 📊 Historical sentiment overview
+* Mood trend visualization
+* Emotional pattern tracking
+* Historical sentiment overview
 
----
 
 ### 🔥 Streak System
 
-* 📅 Tracks daily journaling activity
-* 🚀 Encourages consistency
-* 🏆 Motivation-based feedback loop
+* Tracks daily journaling activity
+* Encourages consistency
+* Motivation-based feedback loop
 
----
 
 ### 👤 Profile Module
 
-* 👤 User information dashboard
-* 📊 Activity summary
-* ⚙️ Profile management
+* User information dashboard
+* Activity summary
+* Profile management
 
----
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-## 🔄 Application Flow
-
-## ━━━━━━━━━━━━━━━━━━━━
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+ 
+## Application Flow
 
 ```
 🔐 Login / Register
         ↓
-🏠 Dashboard
-        ↓
-────────────────────────
-📖 Journal | 🫙 Jar | 😊 Mood | 👤 Profile
-────────────────────────
+🏠 Dashboard | 🫙 Jar | 📖 Entries | 👤 Profile
 ```
 
-### 🧭 Navigation System
+<br>
 
-* Bottom navigation-based UI
-* Instant module switching
-* State-driven updates (real-time UI refresh)
+### Core Technologies
 
----
+<table align="center">
+  <tr>
+    <td align="center" width="160">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/visualstudio/visualstudio-plain.svg" width="50"><br>
+      Visual Studio
+    </td>
 
-## ━━━━━━━━━━━━━━━━━━━━
+    <td align="center" width="160">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" width="50"><br>
+      Figma
+    </td>
 
-## 🧠 Technical Stack
+    <td align="center" width="160">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" width="50"><br>
+      SQLite
+    </td>
+  </tr>
 
-## ━━━━━━━━━━━━━━━━━━━━
+  <tr>
+    <td align="center" width="160">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dotnetcore/dotnetcore-original.svg" width="50"><br>
+      .NET
+    </td>
 
-### 💻 Core Technologies
+    <td align="center" width="160">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blazor/blazor-original.svg" width="50"><br>
+      Blazor
+    </td>
 
-* 🟣 ASP.NET Core / Blazor
-* ⚙️ C++ Backend Logic
-* 🗄️ SQLite Database
-* 🧠 Roslyn Compiler (C#)
-* 🧰 Visual Studio 2022
+    <td align="center" width="160">
+      <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" width="50"><br>
+      C++
+    </td>
+  </tr>
+</table>
 
----
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+ 
+##  How to Run
 
-### 🧩 Engineering Principles
-
-* Component-based architecture
-* Separation of concerns
-* Event-driven UI updates
-* Lightweight local persistence
-
----
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-## 🚀 How to Run
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-### 📂 Step 1: Open Project
+### Step 1: Open Project
 
 ```bash
 C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
 ```
 
----
 
-### ▶️ Step 2: Build & Run
+###  Step 2: Build & Run
 
 * Press **F5**
 * OR click **▶ Run (Green Button)**
 
----
 
 ### ⚙️ System Behavior
 
-* NuGet packages auto-restore 📦
-* Project compiles via Roslyn 🧠
-* Local server starts automatically 🌐
+* NuGet packages auto-restore 
+* Project compiles via Roslyn 
+* Local server starts automatically 
 
----
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-## 👨‍💻 Development Team
-
-## ━━━━━━━━━━━━━━━━━━━━
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+ 
+## Development Team
 
 <table>
   <tr>
@@ -250,20 +219,15 @@ C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
   </tr>
 </table>
 
----
-
-## ━━━━━━━━━━━━━━━━━━━━
-
-## 🌱 Closing Statement
-
-## ━━━━━━━━━━━━━━━━━━━━
+<br>
+ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
 
 <p align="center">
   <b>“CITADEL is not just an app — it is a reflection of growth, gratitude, and human experience.”</b>
 </p>
 
 <p align="center">
-  🌿 Built with intention • Designed for reflection • Engineered for growth 🌿
+   Built with intention • Designed for reflection • Engineered for growth 
 </p>
 
 ---
