@@ -16,7 +16,7 @@
 </p>
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  
 ## Project Overview
 
@@ -32,7 +32,7 @@ It transforms everyday memories into meaningful reflections that users can revis
 * 📝 General Journal Entries
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  
 ## Purpose & Vision
 
@@ -47,7 +47,7 @@ The system is designed to:
 >  *“Small reflections lead to meaningful growth.”*
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  
 ## System Architecture
 
@@ -65,7 +65,7 @@ Application Core
 Each module operates independently while communicating through a unified navigation system.
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## 📊 UML Design
 
@@ -74,7 +74,7 @@ Each module operates independently while communicating through a unified navigat
 </p>
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## Features & Functionalities
 
@@ -114,7 +114,7 @@ Each module operates independently while communicating through a unified navigat
 * Profile management
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  
 ## Application Flow
 
@@ -210,7 +210,7 @@ Each module operates independently while communicating through a unified navigat
 </p>
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  
 ##  How to Run
 
@@ -234,7 +234,7 @@ C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
 * Local server starts automatically 
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
  
 ## Development Team
 
@@ -265,7 +265,7 @@ C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
 </table>
 
 <br>
- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 <p align="center">
   <b>“CITADEL is not just an app — it is a reflection of growth, gratitude, and human experience.”</b>
