@@ -93,6 +93,7 @@ The app continuously updates streaks and mood insights based on user activity.
 📧 [Insert email]
 
 👨‍💻 Julian Carlo C. Magbuhat – Graphic User Interface 
+
 📧 24-01351@g.batstate-u.edu.ph  
 
 👨‍💻 Apolinar, Jev Austin A. – Logic Developer / Tester  
