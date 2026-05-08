@@ -83,6 +83,36 @@ The app continuously updates streaks and mood insights based on user activity.
 
 ## How to Run the Application
 
+CITADEL is a **.NET-based project prototype** developed using **Visual Studio 2022**.
+
+### Steps to Run:
+
+1. Open the solution file in Visual Studio 2022:
+C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
+
+
+2. Wait for Visual Studio to:
+- Load the project  
+- Restore NuGet packages  
+- Resolve dependencies  
+
+3. Run the application by:
+- Pressing **F5**, or  
+- Clicking the **green ▶ Run button**
+
+4. The application will build and launch in a local development environment.
+
+--
+
+### Technical Notes:
+- Built using **ASP.NET Core / Blazor**
+- Uses **.NET 10**
+- Compiled using **Roslyn C# compiler (csc)**
+- Developed in **Visual Studio 2022**
+- Visual Studio handles:
+  - Package restoration (NuGet)
+  - Compilation
+  - Local server execution
 ---
 
 ## Developer Team
