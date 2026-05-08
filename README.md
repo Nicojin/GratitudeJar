@@ -48,29 +48,24 @@ The main purpose of CITADEL is to promote emotional well-being by encouraging us
 
 ---
 
-## How the Program Works
+## ⚙️ How the Program Works
 
-CITADEL is a mobile journaling application prototype developed using modern mobile application development tools and frameworks.
+CITADEL is a mobile journaling application prototype developed using modern software development practices.
 
-The application follows a component-based mobile app architecture, where each feature (Journal, Mood Board, Gratitude Jar, and Profile) is treated as a separate screen or module connected through a bottom navigation bar.
+The application follows a component-based architecture where each feature (Journal, Mood Board, Gratitude Jar, Profile) is treated as a separate module connected through a bottom navigation bar.
 
-### Technical Overview
-- The app is built using:
-  - *[Insert Framework/Language Here]*  
-    Example: Flutter, React Native, Android Studio, etc.
+### 🧠 Technical Overview
 
-- Data such as journal entries, moods, and streaks are stored using:
-  - *[Insert Database/Storage Here]*  
-    Example: Firebase, SQLite, Local Storage, etc.
-
+- The system is developed using **Razor Pages** for the web interface and **C++** for backend logic and core functionality.
+- Data such as journal entries, moods, and streaks are stored using **SQLite**.
 - The UI updates dynamically when users interact with different modules.
 - State management is used to handle changes in entries, moods, and user activity in real time.
 
 ---
 
-## App Behavior
+## 📱 App Behavior
 
-When the app launches, the user is directed to the login interface where they can either create an account or log in to an existing account.
+When the app launches, the user is directed to the login interface where they can create an account or log in.
 
 A bottom navigation bar allows switching between:
 - Mood Board and Streak
@@ -78,42 +73,17 @@ A bottom navigation bar allows switching between:
 - Entries
 - Profile
 
-When a user taps an icon, the screen dynamically changes to display the selected section.
-
-The user can then:
-- Create, edit, or delete journal entries in the Entries section
-- View mood trends in the Mood Board section
+Users can:
+- Create, edit, or delete journal entries
+- View mood trends
 - Shake the Gratitude Jar to reveal a random memory
-- View and manage profile information in the Profile section
+- Manage profile information
 
-The app continuously updates data such as streaks and mood insights based on user activity.
+The app continuously updates streaks and mood insights based on user activity.
 
 ---
 
 ## How to Run the Application
-
-### 1. Clone the Repository
-```bash
-git clone https://github.com/your-username/citadel-app.git
-```
-
-### 2. Open the Project
-Open the project using your preferred IDE or code editor.
-
-### 3. Install Dependencies
-```bash
-npm install
-```
-
-### 4. Run the Application
-```bash
-npm start
-```
-
-### 5. Launch on Mobile Emulator or Device
-- Android Emulator
-- iOS Simulator
-- Physical Mobile Device
 
 ---
 
@@ -122,7 +92,7 @@ npm start
 👨‍💻 Fernandez, John Rommel P. – Project Manager / Lead Developer  
 📧 [Insert email]
 
-👨‍💻 Julian Carlo C. Magbuhat – GUI  
+👨‍💻 Julian Carlo C. Magbuhat – Graphic User Interface 
 📧 24-01351@g.batstate-u.edu.ph  
 
 👨‍💻 Apolinar, Jev Austin A. – Logic Developer / Tester  
