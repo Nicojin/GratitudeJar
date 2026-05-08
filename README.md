@@ -87,7 +87,7 @@ The app continuously updates streaks and mood insights based on user activity.
 
 ## Developer Team
 
-<table width="100%>
+<table width="100%">
   <tr>
     <th>Name</th>
     <th>Role</th>
@@ -112,5 +112,4 @@ The app continuously updates streaks and mood insights based on user activity.
     <td>24-06667@g.batstate-u.edu.ph</td>
   </tr>
 </table>
-
 ---
