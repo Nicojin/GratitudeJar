@@ -268,5 +268,3 @@ C:\Users\Admin\source\repos\GratitudeJar\GratitudeJar.slnx
 
 ---
 
-
-Just tell me 👍
