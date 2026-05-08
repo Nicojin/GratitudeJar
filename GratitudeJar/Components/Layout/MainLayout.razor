@@ -1,29 +1,11 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
 
-<div class="app-container">
-    <header class="top-bar">
-        <div class="logo-area">
-            <span class="brand-name">Gratitude Jar</span>
-        </div>
-        <button class="notification-btn" style="background:none; border:none; font-size: 1.2rem;">🔔</button>
-    </header>
+<div class="app-shell">
+    @Body
+</div>
 
-    <main class="content-area">
-        @Body
-    </main>
-
-    <nav class="bottom-nav">
-        <NavLink href="/" Match="NavLinkMatch.All" class="nav-item">
-            <span>🏠</span><span>Home</span>
-        </NavLink>
-        <NavLink href="/jar" class="nav-item">
-            <span>🫙</span><span>Jar</span>
-        </NavLink>
-        <NavLink href="/entries" class="nav-item">
-            <span>📁</span><span>Entries</span>
-        </NavLink>
-        <NavLink href="/user" class="nav-item">
-            <span>👤</span><span>User</span>
-        </NavLink>
-    </nav>
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">&#10005;</span>
 </div>

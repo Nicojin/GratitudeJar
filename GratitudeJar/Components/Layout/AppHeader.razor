@@ -1,0 +1,14 @@
+@code {
+    [Parameter] public string Subtitle { get; set; } = string.Empty;
+}
+
+<header class="app-header">
+    <div class="header-top-row">
+        <span class="header-brand">GratitudeJar</span>
+        <button class="header-bell" aria-label="Notifications">&#128276;</button>
+    </div>
+    @if (!string.IsNullOrEmpty(Subtitle))
+    {
+        <div class="header-subtitle">@Subtitle</div>
+    }
+</header>

@@ -1,0 +1,150 @@
+@page "/user/profile"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthService AuthService
+@inject UserService UserService
+@inject NavigationManager Nav
+@inject IWebHostEnvironment Env
+
+<PageTitle>GratitudeJar — Manage Profile</PageTitle>
+
+<AppHeader Subtitle="A Glimpse of You" />
+
+<div class="main-content">
+    <div class="jar-header-section"></div>
+
+    <div class="page-body">
+        @if (currentUser is null)
+        {
+            <div class="loading-spinner">Loading…</div>
+        }
+        else
+        {
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-error">@errorMessage</div>
+            }
+            @if (!string.IsNullOrEmpty(successMessage))
+            {
+                <div class="alert alert-success">@successMessage</div>
+            }
+
+            <div class="avatar-edit-section">
+                <div class="avatar-edit-ring">
+                    <div class="avatar-edit-img">
+                        @if (!string.IsNullOrEmpty(avatarPreview))
+                        {
+                            <img src="@avatarPreview" alt="Profile" />
+                        }
+                        else if (!string.IsNullOrEmpty(currentUser.ProfilePic))
+                        {
+                            <img src="@currentUser.ProfilePic" alt="Profile" />
+                        }
+                        else
+                        {
+                            <span>&#128100;</span>
+                        }
+                    </div>
+                    <label class="avatar-camera-btn" title="Change Photo">
+                        &#128247;
+                        <InputFile OnChange="OnAvatarSelected" accept=".jpg,.jpeg,.png,.webp" class="hidden-file-input" />
+                    </label>
+                </div>
+                <label class="avatar-change-label">Change Photo</label>
+            </div>
+
+            <div class="entry-form">
+                <div>
+                    <label class="form-label-plain">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Your name" @bind="fullName" />
+                </div>
+
+                <div>
+                    <label class="form-label-plain">Username</label>
+                    <input type="text" class="form-input" placeholder="@@username" @bind="username" />
+                </div>
+
+                <div>
+                    <label class="form-label-plain">Bio</label>
+                    <textarea class="form-input form-textarea"
+                              placeholder="Write a brief bio about yourself…"
+                              maxlength="150"
+                              @bind="bio"
+                              @bind:event="oninput"
+                              style="min-height: 90px;"></textarea>
+                    <div class="char-counter">@bio.Length/150 characters</div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" @onclick='() => Nav.NavigateTo("/user")'>Cancel</button>
+                    <button class="btn btn-primary" @onclick="SaveProfile" disabled="@isSaving">
+                        @(isSaving ? "Saving…" : "✓ Save Changes")
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<BottomNav />
+
+@code {
+    private GratitudeJar.Models.User? currentUser;
+    private string fullName = string.Empty;
+    private string username = string.Empty;
+    private string bio = string.Empty;
+    private string errorMessage = string.Empty;
+    private string successMessage = string.Empty;
+    private bool isSaving = false;
+    private string avatarPreview = string.Empty;
+    private IBrowserFile? avatarFile;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+        if (currentUser is null) return;
+        fullName = currentUser.FullName;
+        username = currentUser.Username;
+        bio = currentUser.Bio;
+    }
+
+    private async Task OnAvatarSelected(InputFileChangeEventArgs e)
+    {
+        avatarFile = e.File;
+        var buffer = new byte[Math.Min(avatarFile.Size, 200_000)];
+        await avatarFile.OpenReadStream(5 * 1024 * 1024).ReadAsync(buffer);
+        avatarPreview = $"data:{avatarFile.ContentType};base64,{Convert.ToBase64String(buffer)}";
+    }
+
+    private async Task SaveProfile()
+    {
+        if (currentUser is null) return;
+        isSaving = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+
+        string? newPhotoPath = null;
+        if (avatarFile is not null)
+        {
+            var dir = Path.Combine(Env.WebRootPath, "uploads", currentUser.Id.ToString());
+            Directory.CreateDirectory(dir);
+            var ext = Path.GetExtension(avatarFile.Name).ToLowerInvariant();
+            var fileName = $"avatar_{Guid.NewGuid()}{ext}";
+            var fullPath = Path.Combine(dir, fileName);
+            await using var stream = avatarFile.OpenReadStream(5 * 1024 * 1024);
+            await using var fs = File.Create(fullPath);
+            await stream.CopyToAsync(fs);
+            newPhotoPath = $"/uploads/{currentUser.Id}/{fileName}";
+        }
+
+        var (success, error) = await UserService.UpdateProfileAsync(currentUser.Id, fullName, username, bio, newPhotoPath);
+        if (success)
+        {
+            successMessage = "Profile updated!";
+            currentUser = await AuthService.GetCurrentUserAsync();
+        }
+        else
+            errorMessage = error;
+
+        isSaving = false;
+    }
+}

@@ -1,0 +1,79 @@
+@page "/user"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthService AuthService
+
+<PageTitle>GratitudeJar — Profile</PageTitle>
+
+<AppHeader Subtitle="A Glimpse of You" />
+
+<div class="main-content">
+    <div class="jar-header-section"></div>
+
+    <div class="profile-page-body">
+        @if (currentUser is not null)
+        {
+            <div>
+                <div class="profile-section-label">Settings</div>
+                <div class="profile-user-card">
+                    <div class="profile-avatar">
+                        @if (!string.IsNullOrEmpty(currentUser.ProfilePic))
+                        {
+                            <img src="@currentUser.ProfilePic" alt="@currentUser.FullName" />
+                        }
+                        else
+                        {
+                            <span>&#128100;</span>
+                        }
+                    </div>
+                    <div>
+                        <div class="profile-user-name">@currentUser.FullName</div>
+                        <div class="profile-user-bio">@(string.IsNullOrEmpty(currentUser.Bio) ? "Grateful for life" : currentUser.Bio)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="profile-section-label">General</div>
+                <div class="settings-group">
+                    <a href="/user/profile" class="settings-item">
+                        <span class="settings-item-icon">&#128100;</span>
+                        Manage Profile
+                    </a>
+                    <a href="/user/password" class="settings-item">
+                        <span class="settings-item-icon">&#128274;</span>
+                        Password and Security
+                    </a>
+                    <button class="settings-item" @onclick="() => {}">
+                        <span class="settings-item-icon">&#128196;</span>
+                        Privacy Policy
+                    </button>
+                    <button class="settings-item" @onclick="() => {}">
+                        <span class="settings-item-icon">&#128209;</span>
+                        Terms of Use
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <div class="profile-section-label">Account</div>
+                <div class="settings-group">
+                    <a href="/account/logout" class="settings-item">
+                        <span class="settings-item-icon">&#128682;</span>
+                        Log out
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<BottomNav />
+
+@code {
+    private GratitudeJar.Models.User? currentUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+    }
+}

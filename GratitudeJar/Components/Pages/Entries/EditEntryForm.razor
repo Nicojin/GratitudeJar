@@ -1,0 +1,185 @@
+@page "/entries/edit/{Id:int}"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthService AuthService
+@inject IEntryRepository EntryRepo
+@inject NavigationManager Nav
+@inject IWebHostEnvironment Env
+
+<PageTitle>GratitudeJar — Edit Entry</PageTitle>
+
+<AppHeader Subtitle="Find Freedom in the Refinement." />
+
+<div class="main-content">
+    <div class="jar-header-section"></div>
+
+    <div class="page-body">
+        <div class="back-row">
+            <button class="back-btn" @onclick="GoBack">&#8249;</button>
+            <h2>Edit Entry</h2>
+        </div>
+
+        @if (entry is null)
+        {
+            <div class="loading-spinner">Loading entry…</div>
+        }
+        else
+        {
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-error">@errorMessage</div>
+            }
+            @if (!string.IsNullOrEmpty(successMessage))
+            {
+                <div class="alert alert-success">@successMessage</div>
+            }
+
+            <div class="entry-form">
+                @if (entry is MemoryEntry memEntry)
+                {
+                    <div class="photo-upload-section">
+                        <label class="form-label-plain">Photo</label>
+                        <div class="photo-grid">
+                            @if (string.IsNullOrEmpty(previewSrc) && string.IsNullOrEmpty(memEntry.ImagePath))
+                            {
+                                <label class="photo-add-btn">
+                                    <span class="plus">+</span>
+                                    <span>Add</span>
+                                    <InputFile OnChange="OnPhotoSelected" accept=".jpg,.jpeg,.png,.webp" class="hidden-file-input" />
+                                </label>
+                            }
+                            @if (!string.IsNullOrEmpty(previewSrc))
+                            {
+                                <div class="photo-thumb-wrap">
+                                    <img src="@previewSrc" alt="new photo" />
+                                    <button type="button" class="photo-remove-btn" @onclick="RemoveNewPhoto">&#10005;</button>
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(memEntry.ImagePath) && !removeExistingPhoto)
+                            {
+                                <div class="photo-thumb-wrap">
+                                    <img src="@memEntry.ImagePath" alt="photo" />
+                                    <button type="button" class="photo-remove-btn" @onclick="() => removeExistingPhoto = true">&#10005;</button>
+                                </div>
+                            }
+                        </div>
+                        <div class="photo-hint">Tap &#10005; to remove or + to add a photo</div>
+                    </div>
+                }
+
+                <div>
+                    <label class="form-label-plain">What did this moment mean to you?</label>
+                    <textarea class="form-input form-textarea"
+                              placeholder="Write your thoughts here…"
+                              @bind="content"></textarea>
+                </div>
+
+                <div>
+                    <label class="form-label-plain">Mood</label>
+                    <input type="text" class="form-input" placeholder="Happy, Grateful, Peaceful…" @bind="mood" />
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn-secondary" @onclick="GoBack">Cancel</button>
+                    <button class="btn btn-primary" @onclick="SaveChanges" disabled="@isSaving">
+                        @(isSaving ? "Saving…" : "✓ Save Changes")
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<BottomNav />
+
+@code {
+    [Parameter] public int Id { get; set; }
+
+    private GratitudeJar.Models.User? currentUser;
+    private Entry? entry;
+    private string content = string.Empty;
+    private string mood = string.Empty;
+    private string errorMessage = string.Empty;
+    private string successMessage = string.Empty;
+    private bool isSaving = false;
+
+    private IBrowserFile? newFile;
+    private string previewSrc = string.Empty;
+    private bool removeExistingPhoto = false;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+        if (currentUser is null) return;
+
+        entry = await EntryRepo.GetById(Id, currentUser.Id);
+        if (entry is null) return;
+
+        content = entry.Content;
+        mood = entry.Mood;
+    }
+
+    private async Task OnPhotoSelected(InputFileChangeEventArgs e)
+    {
+        newFile = e.File;
+        var buffer = new byte[Math.Min(newFile.Size, 200_000)];
+        await newFile.OpenReadStream(5 * 1024 * 1024).ReadAsync(buffer);
+        previewSrc = $"data:{newFile.ContentType};base64,{Convert.ToBase64String(buffer)}";
+    }
+
+    private void RemoveNewPhoto()
+    {
+        newFile = null;
+        previewSrc = string.Empty;
+    }
+
+    private async Task SaveChanges()
+    {
+        if (entry is null || currentUser is null) return;
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            errorMessage = "Content cannot be empty.";
+            return;
+        }
+
+        isSaving = true;
+        errorMessage = string.Empty;
+        successMessage = string.Empty;
+
+        entry.Content = content.Trim();
+        entry.Mood = mood.Trim();
+
+        if (entry is MemoryEntry mem)
+        {
+            if (removeExistingPhoto)
+                mem.ImagePath = string.Empty;
+
+            if (newFile is not null)
+                mem.ImagePath = await SavePhotoAsync(currentUser.Id, newFile);
+        }
+
+        await EntryRepo.Update(entry);
+
+        successMessage = "Entry saved!";
+        isSaving = false;
+        await Task.Delay(1200);
+        Nav.NavigateTo("/entries/edit");
+    }
+
+    private async Task<string> SavePhotoAsync(int userId, IBrowserFile file)
+    {
+        if (file.Size > 5 * 1024 * 1024) return string.Empty;
+        var ext = Path.GetExtension(file.Name).ToLowerInvariant();
+        if (!new[] { ".jpg", ".jpeg", ".png", ".webp" }.Contains(ext)) return string.Empty;
+
+        var dir = Path.Combine(Env.WebRootPath, "uploads", userId.ToString());
+        Directory.CreateDirectory(dir);
+        var fileName = $"{Guid.NewGuid()}{ext}";
+        var fullPath = Path.Combine(dir, fileName);
+        await using var stream = file.OpenReadStream(5 * 1024 * 1024);
+        await using var fs = File.Create(fullPath);
+        await stream.CopyToAsync(fs);
+        return $"/uploads/{userId}/{fileName}";
+    }
+
+    private void GoBack() => Nav.NavigateTo("/entries/edit");
+}

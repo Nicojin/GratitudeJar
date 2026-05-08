@@ -1,0 +1,79 @@
+@page "/"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthService AuthService
+@inject IEntryRepository EntryRepo
+
+<PageTitle>GratitudeJar — Home</PageTitle>
+
+<AppHeader Subtitle="Your Daily Gratitude" />
+
+<div class="main-content">
+    @if (currentUser is null)
+    {
+        <div class="loading-spinner">Loading…</div>
+    }
+    else
+    {
+        <div class="home-welcome-bar">
+            <h3>Welcome back, @currentUser.FullName!</h3>
+            <p>Let's add another moment worth keeping.</p>
+        </div>
+
+        <div class="home-body">
+            <div class="streak-container">
+                <div class="streak-flame-ring">&#128293;</div>
+                <div class="streak-label">@streak Streak!</div>
+            </div>
+
+            @if (latestEntry is not null)
+            {
+                <div class="entry-preview-card">
+                    <div class="entry-preview-header">
+                        <div>
+                            <div class="entry-preview-feeling">You are feeling</div>
+                            <div class="entry-preview-mood">@(string.IsNullOrEmpty(latestEntry.Mood) ? "Grateful" : latestEntry.Mood)</div>
+                        </div>
+                        <span style="color: rgba(255,255,255,0.5); font-size: 1.2rem;">&#8942;</span>
+                    </div>
+                    <div class="entry-preview-body">@latestEntry.Content</div>
+                    @if (latestEntry is MemoryEntry mem && !string.IsNullOrEmpty(mem.ImagePath))
+                    {
+                        <img class="entry-preview-img" src="@mem.ImagePath" alt="Entry photo" />
+                    }
+                    else
+                    {
+                        <div class="entry-preview-placeholder">&#128214;</div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="no-entries-hint">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">&#129814;</div>
+                    <strong>Your jar is empty!</strong><br />
+                    Tap <a href="/entries/add" style="color: var(--color-primary); font-weight: 700;">+ Add Entry</a> to fill it with your first moment.
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<BottomNav />
+
+@code {
+    private GratitudeJar.Models.User? currentUser;
+    private int streak;
+    private Entry? latestEntry;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+        if (currentUser is null) return;
+
+        var all = await EntryRepo.GetAll(currentUser.Id);
+        latestEntry = all.FirstOrDefault();
+
+        var jar = new JarApp { Profile = currentUser, Entries = all };
+        streak = jar.GetStreak();
+    }
+}

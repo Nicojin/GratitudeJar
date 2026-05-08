@@ -1,0 +1,202 @@
+@page "/entries/add"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthService AuthService
+@inject IEntryRepository EntryRepo
+@inject NavigationManager Nav
+@inject IWebHostEnvironment Env
+
+<PageTitle>GratitudeJar — Add Entry</PageTitle>
+
+<AppHeader Subtitle="Create the Memories Worth Keeping" />
+
+<div class="main-content">
+    <div class="jar-header-section"></div>
+
+    <div class="page-body">
+        <div class="back-row">
+            <button class="back-btn" @onclick="GoBack">&#8249;</button>
+            <h2>Add New Entry</h2>
+        </div>
+
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-error">@errorMessage</div>
+        }
+
+        <div class="entry-form">
+            <div>
+                <label class="form-label-plain">Entry Type</label>
+                <select class="form-input form-select" @bind="selectedType">
+                    <option value="Entry">Entry</option>
+                    <option value="Memory">Memory</option>
+                    <option value="Milestone">Milestone</option>
+                    <option value="Quote">Quote</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="form-label-plain">@TitleLabel</label>
+                <input type="text" class="form-input" placeholder="@TitlePlaceholder" @bind="title" />
+            </div>
+
+            @if (selectedType == "Quote")
+            {
+                <div>
+                    <label class="form-label-plain">Who said it?</label>
+                    <input type="text" class="form-input" placeholder="Author or source" @bind="author" />
+                </div>
+            }
+
+            @if (selectedType == "Milestone")
+            {
+                <div>
+                    <label class="form-label-plain">Milestone</label>
+                    <input type="text" class="form-input" placeholder="Describe this milestone" @bind="milestone" />
+                </div>
+            }
+
+            <div>
+                <label class="form-label-plain">@ContentLabel</label>
+                <textarea class="form-input form-textarea" placeholder="Write your thoughts here…" @bind="content"></textarea>
+            </div>
+
+            <div>
+                <label class="form-label-plain">Mood</label>
+                <input type="text" class="form-input" placeholder="Happy, Grateful, Peaceful…" @bind="mood" />
+            </div>
+
+            @if (selectedType == "Memory")
+            {
+                <div class="photo-upload-section">
+                    <label class="form-label-plain">Photo (optional)</label>
+                    <div class="photo-grid">
+                        <label class="photo-add-btn">
+                            <span class="plus">+</span>
+                            <span>Add</span>
+                            <InputFile OnChange="OnPhotoSelected" accept=".jpg,.jpeg,.png,.webp" class="hidden-file-input" />
+                        </label>
+                        @if (!string.IsNullOrEmpty(previewSrc))
+                        {
+                            <div class="photo-thumb-wrap">
+                                <img src="@previewSrc" alt="preview" />
+                                <button type="button" class="photo-remove-btn" @onclick="RemovePhoto">&#10005;</button>
+                            </div>
+                        }
+                    </div>
+                    <div class="photo-hint">1 photo, up to 5MB.</div>
+                </div>
+            }
+
+            <button class="btn btn-primary" @onclick="SaveEntry" disabled="@isSaving">
+                @(isSaving ? "Saving…" : "Save Entry")
+            </button>
+        </div>
+    </div>
+</div>
+
+<BottomNav />
+
+@code {
+    private GratitudeJar.Models.User? currentUser;
+    private string selectedType = "Entry";
+    private string title = string.Empty;
+    private string content = string.Empty;
+    private string mood = string.Empty;
+    private string author = string.Empty;
+    private string milestone = string.Empty;
+    private string errorMessage = string.Empty;
+    private bool isSaving = false;
+
+    private IBrowserFile? pendingFile;
+    private string previewSrc = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+    }
+
+    private string TitleLabel => selectedType switch
+    {
+        "Memory"    => "Memory Title",
+        "Milestone" => "Milestone Title",
+        "Quote"     => "Title",
+        _           => "Entry Title"
+    };
+
+    private string TitlePlaceholder => selectedType switch
+    {
+        "Memory"    => "Name this memory",
+        "Milestone" => "Name this milestone",
+        "Quote"     => "Give this quote a title",
+        _           => "Give this entry a title"
+    };
+
+    private string ContentLabel => selectedType == "Quote" ? "The Quote" : "What did this moment mean to you?";
+
+    private async Task OnPhotoSelected(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        pendingFile = file;
+        var buffer = new byte[Math.Min(file.Size, 200_000)];
+        await file.OpenReadStream(5 * 1024 * 1024).ReadAsync(buffer);
+        previewSrc = $"data:{file.ContentType};base64,{Convert.ToBase64String(buffer)}";
+    }
+
+    private void RemovePhoto()
+    {
+        pendingFile = null;
+        previewSrc = string.Empty;
+    }
+
+    private async Task SaveEntry()
+    {
+        if (currentUser is null) return;
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            errorMessage = "Please write something before saving.";
+            return;
+        }
+
+        isSaving = true;
+        errorMessage = string.Empty;
+
+        var imagePath = selectedType == "Memory" && pendingFile is not null
+            ? await SavePhotoAsync(currentUser.Id, pendingFile)
+            : string.Empty;
+
+        Entry entry = selectedType switch
+        {
+            "Memory"    => new MemoryEntry    { ImagePath = imagePath },
+            "Milestone" => new MilestoneEntry { Milestone = milestone.Trim() },
+            "Quote"     => new QuoteEntry     { Author = author.Trim() },
+            _           => new Entry()
+        };
+
+        entry.UserId    = currentUser.Id;
+        entry.Title     = string.IsNullOrWhiteSpace(title) ? selectedType : title.Trim();
+        entry.Content   = content.Trim();
+        entry.Mood      = mood.Trim();
+        entry.EntryDate = DateTime.UtcNow;
+
+        await EntryRepo.Add(entry);
+        Nav.NavigateTo("/entries");
+    }
+
+    private async Task<string> SavePhotoAsync(int userId, IBrowserFile file)
+    {
+        if (file.Size > 5 * 1024 * 1024) return string.Empty;
+        var ext = Path.GetExtension(file.Name).ToLowerInvariant();
+        if (!new[] { ".jpg", ".jpeg", ".png", ".webp" }.Contains(ext)) return string.Empty;
+
+        var dir = Path.Combine(Env.WebRootPath, "uploads", userId.ToString());
+        Directory.CreateDirectory(dir);
+        var fileName = $"{Guid.NewGuid()}{ext}";
+        var fullPath = Path.Combine(dir, fileName);
+        await using var stream = file.OpenReadStream(5 * 1024 * 1024);
+        await using var fs = File.Create(fullPath);
+        await stream.CopyToAsync(fs);
+        return $"/uploads/{userId}/{fileName}";
+    }
+
+    private void GoBack() => Nav.NavigateTo("/entries");
+}

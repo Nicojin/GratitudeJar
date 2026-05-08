@@ -1,0 +1,123 @@
+@page "/jar"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthService AuthService
+@inject IEntryRepository EntryRepo
+@inject IJSRuntime JS
+@implements IDisposable
+
+<PageTitle>GratitudeJar — Your Jar</PageTitle>
+
+<AppHeader Subtitle="Your Jar of Moments" />
+
+<div class="main-content">
+    <div class="jar-header-section"></div>
+
+    <div class="jar-body">
+        <button class="shake-bubble" @onclick="ShakeJar">Shake Me! &#128073;</button>
+
+        <div class="jar-wrapper @(isShaking ? "jar--shaking" : "")" @onclick="ShakeJar">
+            <div class="jar-lid-rim"></div>
+            <div class="jar-lid"></div>
+            <div class="jar-glass">
+                <div class="jar-fill-level" style="height: @(fillPercent)%;"></div>
+                @if (entries.Count > 0)
+                {
+                    <div class="jar-slips">
+                        @foreach (var (entry, i) in entries.Take(6).Select((e, i) => (e, i)))
+                        {
+                            var left = (i % 3) * 28 + 10;
+                            var bottom = (i / 3) * 55 + 10;
+                            var rotate = (i % 2 == 0 ? -12 : 10) + (i * 3);
+                            <div class="paper-slip"
+                                 style="left: @(left)px; bottom: @(bottom)px; transform: rotate(@(rotate)deg);">
+                                <div class="slip-line"></div>
+                                <div class="slip-line"></div>
+                                <div class="slip-line" style="width: 60%;"></div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="jar-progress-section">
+            <div class="jar-progress-bar-track">
+                <div class="jar-progress-bar-fill" style="width: @(fillPercent)%;"></div>
+            </div>
+        </div>
+
+        @if (showModal && randomEntry is not null)
+        {
+            <div class="modal-overlay" @onclick="CloseModal">
+                <div class="found-moment-card" @onclick:stopPropagation="true">
+                    <button class="found-moment-close" @onclick="CloseModal">&#10005;</button>
+                    <div class="found-moment-title">A Found Moment</div>
+                    <div class="found-moment-meta">
+                        <span>@randomEntry.EntryDate.ToString("MMMM d, yyyy")</span>
+                        <span>&#128578;</span>
+                    </div>
+                    <div class="found-moment-content">@randomEntry.Content</div>
+                    @if (!string.IsNullOrEmpty(randomEntry.Mood))
+                    {
+                        <div class="found-moment-mood">@randomEntry.Mood</div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<BottomNav />
+
+@code {
+    private GratitudeJar.Models.User? currentUser;
+    private List<Entry> entries = new();
+    private bool isShaking = false;
+    private bool showModal = false;
+    private Entry? randomEntry;
+    private int fillPercent = 0;
+    private DotNetObjectReference<Jar>? dotnetRef;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+        if (currentUser is null) return;
+
+        entries = await EntryRepo.GetAll(currentUser.Id);
+        var jar = new JarApp { Profile = currentUser, Entries = entries };
+        fillPercent = jar.GetJarFillPercent();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotnetRef = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("gratitudeJarJS.initShake", dotnetRef);
+        }
+    }
+
+    private async Task ShakeJar()
+    {
+        if (isShaking) return;
+        isShaking = true;
+        StateHasChanged();
+        await Task.Delay(650);
+        isShaking = false;
+
+        var jar = new JarApp { Profile = currentUser!, Entries = entries };
+        randomEntry = jar.GetRandomEntry();
+
+        if (randomEntry is not null)
+            showModal = true;
+
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public async Task OnDeviceShake() => await ShakeJar();
+
+    private void CloseModal() => showModal = false;
+
+    public void Dispose() => dotnetRef?.Dispose();
+}

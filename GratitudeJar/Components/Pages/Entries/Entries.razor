@@ -1,0 +1,64 @@
+@page "/entries"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthService AuthService
+@inject IEntryRepository EntryRepo
+
+<PageTitle>GratitudeJar — Entries</PageTitle>
+
+<AppHeader Subtitle="Fill Your Jar with What Matters" />
+
+<div class="main-content">
+    <div class="jar-header-section"></div>
+
+    <div class="entries-body">
+        @if (recentEntries.Count > 0)
+        {
+            <div class="entries-section-label">Recently Added</div>
+            <div class="entries-recent-grid">
+                @foreach (var entry in recentEntries.Take(4))
+                {
+                    <div class="entry-thumb">
+                        @if (entry is MemoryEntry mem && !string.IsNullOrEmpty(mem.ImagePath))
+                        {
+                            <img src="@mem.ImagePath" alt="@entry.Title" />
+                        }
+                        else
+                        {
+                            <div class="entry-thumb-placeholder">&#128214;</div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+
+        <a href="/entries/add" class="entries-action-card">
+            <div class="entries-action-icon">&#43;</div>
+            <div class="entries-action-text">
+                <h4>Add</h4>
+                <p>Create New Entry</p>
+            </div>
+        </a>
+
+        <a href="/entries/edit" class="entries-action-card">
+            <div class="entries-action-icon">&#9998;</div>
+            <div class="entries-action-text">
+                <h4>Edit</h4>
+                <p>Rewrite Existing Entry</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<BottomNav />
+
+@code {
+    private GratitudeJar.Models.User? currentUser;
+    private List<Entry> recentEntries = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+        if (currentUser is null) return;
+        recentEntries = await EntryRepo.GetAll(currentUser.Id);
+    }
+}

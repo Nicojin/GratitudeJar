@@ -319,3 +319,13 @@ button, .action-button {
 .mb-4 {
     margin-bottom: var(--space-lg);
 }
+
+:root {
+    --citadel-cream: #FDF8F0;
+    --citadel-dark: #2D3A2A;
+    --citadel-medium: #5D6B52;
+    --citadel-light: rgba(255, 255, 255, 0.15);
+    --citadel-muted: rgba(255, 255, 255, 0.7);
+    --citadel-text: rgba(255, 255, 255, 0.8);
+    --citadel-gold: #D4AF37;
+}

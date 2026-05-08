@@ -1,23 +1,10 @@
-﻿using System;
+namespace GratitudeJar.Models;
 
-namespace GratitudeJar.Models
+public class MemoryEntry : Entry
 {
-    public class MemoryEntry : Entry
-    {
-        public override void Display()
-        {
-            Console.WriteLine($"[MEMORY] {Date:yyyy-MM-dd}: {Content}");
-            if (!string.IsNullOrEmpty(Image))
-                Console.WriteLine($"  Image: {Image}");
-            Console.WriteLine($"  Mood: {MoodTag}");
-        }
+    public string ImagePath { get; set; } = string.Empty;
 
-        public override string Summarize()
-        {
-            string indicator = string.IsNullOrEmpty(Image) ? "" : " [image]";
-            if (Content.Length > 50)
-                return $"Memory{indicator} {Date:MM/dd}: {Content.Substring(0, 47)}...";
-            return $"Memory{indicator} {Date:MM/dd}: {Content}";
-        }
-    }
+    public string GetPhoto() => ImagePath ?? string.Empty;
+    public string GetMoodEmoji() => MoodFlag ?? "😊";
+    public string GetDate() => EntryDate.ToString("MMMM d, yyyy");
 }

@@ -1,0 +1,94 @@
+@page "/entries/edit"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@inject AuthService AuthService
+@inject IEntryRepository EntryRepo
+@inject NavigationManager Nav
+
+<PageTitle>GratitudeJar — Edit Entry</PageTitle>
+
+<AppHeader Subtitle="Find Freedom in the Refinement." />
+
+<div class="main-content">
+    <div class="jar-header-section"></div>
+
+    <div class="page-body">
+        <div class="back-row">
+            <button class="back-btn" @onclick='() => Nav.NavigateTo("/entries")'>&#8249;</button>
+            <h2>Edit Entry</h2>
+        </div>
+
+        @if (entries.Count == 0)
+        {
+            <div class="no-entries-hint">No entries yet. <a href="/entries/add" style="color: var(--color-primary); font-weight:700;">Add your first one!</a></div>
+        }
+        else
+        {
+            <div class="entry-list">
+                @foreach (var entry in entries)
+                {
+                    <div class="entry-list-item">
+                        <div style="flex:1; min-width:0;" @onclick='() => Nav.NavigateTo($"/entries/edit/{entry.EntryId}")'>
+                            <div class="entry-list-title">@entry.Title</div>
+                            <div class="entry-list-preview">@Truncate(entry.Content, 60)</div>
+                            <div class="entry-list-date">@GetDateLabel(entry.EntryDate)</div>
+                        </div>
+                        @if (entry is MemoryEntry mem && !string.IsNullOrEmpty(mem.ImagePath))
+                        {
+                            <img class="entry-list-thumb" src="@mem.ImagePath" alt="@entry.Title" @onclick='() => Nav.NavigateTo($"/entries/edit/{entry.EntryId}")' />
+                        }
+                        else
+                        {
+                            <div class="entry-list-thumb-placeholder" @onclick='() => Nav.NavigateTo($"/entries/edit/{entry.EntryId}")'>&#128214;</div>
+                        }
+                        <button class="entry-list-delete" @onclick="() => ConfirmDelete(entry)">&#128465;</button>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+<DeleteConfirmModal
+    Visible="showDeleteModal"
+    EntryTitle="@(entryToDelete?.Title ?? "")"
+    OnConfirm="DeleteEntry"
+    OnCancel="() => showDeleteModal = false" />
+
+<BottomNav />
+
+@code {
+    private GratitudeJar.Models.User? currentUser;
+    private List<Entry> entries = new();
+    private bool showDeleteModal = false;
+    private Entry? entryToDelete;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUser = await AuthService.GetCurrentUserAsync();
+        if (currentUser is null) return;
+        entries = await EntryRepo.GetAll(currentUser.Id);
+    }
+
+    private void ConfirmDelete(Entry entry)
+    {
+        entryToDelete = entry;
+        showDeleteModal = true;
+    }
+
+    private async Task DeleteEntry()
+    {
+        if (entryToDelete is null || currentUser is null) return;
+        await EntryRepo.Delete(entryToDelete.EntryId, currentUser.Id);
+        entries.Remove(entryToDelete);
+        showDeleteModal = false;
+        entryToDelete = null;
+    }
+
+    private string GetDateLabel(DateTime dt)
+    {
+        var diff = (DateTime.Today - dt.Date).Days;
+        return diff == 0 ? "Today" : diff == 1 ? "Yesterday" : dt.ToString("MMM d");
+    }
+
+    private string Truncate(string s, int max) => s.Length <= max ? s : s[..max] + "…";
+}

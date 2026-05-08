@@ -1,0 +1,21 @@
+@if (Visible)
+{
+    <div class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-warn-icon">&#9888;</div>
+            <h3>Delete Entry?</h3>
+            <p>Are you sure you want to delete "@EntryTitle"? This action cannot be undone.</p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary btn-sm" @onclick="OnCancel">Cancel</button>
+                <button class="btn btn-danger btn-sm" @onclick="OnConfirm">Delete</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter] public bool Visible { get; set; }
+    [Parameter] public string EntryTitle { get; set; } = string.Empty;
+    [Parameter] public EventCallback OnConfirm { get; set; }
+    [Parameter] public EventCallback OnCancel { get; set; }
+}
