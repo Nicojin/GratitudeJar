@@ -87,13 +87,12 @@ The app continuously updates streaks and mood insights based on user activity.
 
 ## Developer Team
 
-👨‍💻 Fernandez, John Rommel P. &nbsp;&nbsp;| Project Manager / Lead Developer  
-Email: 24-07945@g.batstate-u.edu.ph  
+## 👥 Developers / Team Members
 
-👨‍💻 Magbuhat, Julian Carlo C. &nbsp;&nbsp;&nbsp;| Graphic User Interface  
-Email: 24-01351@g.batstate-u.edu.ph  
-
-👨‍💻 Apolinar, Jev Austin A. &nbsp;&nbsp;&nbsp;&nbsp;| Logic Developer / Tester  
-Email: 24-06667@g.batstate-u.edu.ph  
+| Name | Role | Email |
+|------|------|-------|
+| Fernandez, John Rommel P. | Project Manager / Lead Developer | 24-07945@g.batstate-u.edu.ph |
+| Magbuhat, Julian Carlo C. | Graphic User Interface | 24-01351@g.batstate-u.batstate-u.edu.ph |
+| Apolinar, Jev Austin A. | Logic Developer / Tester | 24-06667@g.batstate-u.edu.ph |
 
 ---
