@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="AOOP_Assets/headerReadMe.png" width="100">
+  <img src="AOOP_Assets/headerReadMe.png" width="100%">
 </p>>
 
 <h1 align="center"> CITADEL</h1>
