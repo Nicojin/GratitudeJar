@@ -133,9 +133,9 @@ Each module operates independently while communicating through a unified navigat
 
 <table>
 <tr>
-<th align="center" width="33%">🧩 Frontend & UI</th>
-<th align="center" width="33%">⚙️ Application Logic & 🗄️ Data</th>
-<th align="center" width="33%">🧰 Development Tools</th>
+<th align="center" width="33%"> Frontend & UI</th>
+<th align="center" width="33%"> Application Logic & Data</th>
+<th align="center" width="33%"> Development Tools</th>
 </tr>
 <tr>
 <td align="center" valign="top" width="33%">
