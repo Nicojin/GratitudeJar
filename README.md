@@ -1,6 +1,7 @@
 <p align="center">
   <img src="AOOP_Assets/ReadMeheader.png" width="100%">
 </p>>
+
 ## Project Description and Purpose
 CITADEL is a mobile application prototype designed to help users practice gratitude and self-reflection through digital journaling.
 
